@@ -20,12 +20,15 @@ else
     echo "pip for Python 3 is already installed."
 fi
 
+# Optional Git installation
 echo "Do you want to install git? (y/n)"
 read REPLY
 if [ "$REPLY" != "${REPLY#[Yy]}" ] ;then
     echo "Installing git..."
     sudo apt-get install -y git
 fi
+
+# Option to clone from a Git repository
 echo "Do you want to clone and install from the git repository? (y/n)"
 read REPLY
 if [ "$REPLY" != "${REPLY#[Yy]}" ] ;then
@@ -35,10 +38,13 @@ if [ "$REPLY" != "${REPLY#[Yy]}" ] ;then
     cd ripap
     python3 setup.py install
 else
-    echo "Installing locally..."
+    echo "Skipping git clone and installation."
+fi # This closes the if statement for cloning from git repository.
 
-if ["$REPLY" != "${REPLY#[Nn]}" ] ;then
-    echo "Installing locally..."
+# Proceed with local installation if Git cloning is skipped
+echo "Do you want to proceed with local installation? (y/n)"
+read REPLY
+if [ "$REPLY" != "${REPLY#[Yy]}" ]; then
     echo "Please enter the path to the local setup file:"
     read FILE_PATH
     if [ -f "$FILE_PATH" ]; then
@@ -49,3 +55,5 @@ if ["$REPLY" != "${REPLY#[Nn]}" ] ;then
     fi
 fi
 
+echo "Setup completed successfully."
+exit 0
