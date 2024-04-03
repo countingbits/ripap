@@ -136,17 +136,17 @@ def prompt_for_ap_config():
 def configure_hostapd(ssid, password, channel):
     """Configure the hostapd service with the user's specified settings."""
     log_message("Configuring hostapd...")
-    hostapd_config = f"""
-interface=wlan0
-driver=nl80211
-ssid={ssid}
-hw_mode=g
-channel={channel}
-wpa=2
-wpa_passphrase={password}
-wpa_key_mgmt=WPA-PSK
-rsn_pairwise=CCMP
-    """
+    hostapd_config = hostapd_config = (
+    f"interface=wlan0\n"
+    f"driver=nl80211\n"
+    f"ssid={ssid}\n"
+    f"hw_mode=g\n"
+    f"channel={channel}\n"
+    f"wpa=2\n"
+    f"wpa_passphrase={password}\n"
+    f"wpa_key_mgmt=WPA-PSK\n"
+    f"rsn_pairwise=CCMP"
+)
     try:
         with open("/etc/hostapd/hostapd.conf", "w") as f:
             f.write(hostapd_config)
