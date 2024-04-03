@@ -36,7 +36,7 @@ if [ "$REPLY" != "${REPLY#[Yy]}" ] ;then
     git clone https://github.com/countingbits/ripap.git
     echo "Running setup from cloned repository..."
     cd ripap
-    python3 setup.py install
+    python3 apinstall.py install
 else
     echo "Skipping git clone and installation."
 fi # This closes the if statement for cloning from git repository.
