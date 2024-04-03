@@ -184,12 +184,14 @@ def main():
     ensure_ipv4_forwarding()
     setup_nat_routing()
     
-    # Backup original hostapd configuration file
-    backup_file("/etc/hostapd/hostapd.conf")
+   
     
     # Configure the access point
     ssid, password, channel = prompt_for_ap_config()
     configure_hostapd(ssid, password, channel)
+    
+     # Backup original hostapd configuration file
+    backup_file("/etc/hostapd/hostapd.conf")
     
     #enable services and reboot pi
     enable_and_start_services()
