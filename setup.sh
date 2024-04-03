@@ -28,31 +28,27 @@ if [ "$REPLY" != "${REPLY#[Yy]}" ] ;then
     sudo apt-get install -y git
 fi
 
-# Option to clone from a Git repository
 echo "Do you want to clone and install from the git repository? (y/n)"
 read REPLY
 if [ "$REPLY" != "${REPLY#[Yy]}" ] ;then
-    echo "Cloning repository..."
-    git clone https://github.com/countingbits/ripap.git
+    if [ -d "ripap" ]; then
+        echo "'ripap' directory already exists. Use existing directory or delete and re-clone? (use/del)"
+        read CLONE_REPLY
+        if [ "$CLONE_REPLY" == "del" ]; then
+            rm -rf ripap
+            echo "Removed 'ripap' directory. Cloning again..."
+            git clone https://github.com/your/ripap.git
+        else
+            echo "Using existing 'ripap' directory."
+        fi
+    else
+        echo "Cloning repository..."
+        git clone https://github.com/your/ripap.git
+    fi
     echo "Running setup from cloned repository..."
     cd ripap
-    python3 ./apinstall.py install
-else
-    echo "Skipping git clone and installation."
-fi 
-
-# Proceed with local installation if Git cloning is skipped
-echo "Do you want to proceed with local installation? (y/n)"
-read REPLY
-if [ "$REPLY" != "${REPLY#[Yy]}" ]; then
-    echo "Please enter the path to the local setup file:"
-    read FILE_PATH
-    if [ -f "$FILE_PATH" ]; then
-        echo "Running setup from local file..."
-        python3 "$FILE_PATH"
-    else
-        echo "File not found. Please check the path and try again."
-    fi
+    
+    python3 apinstall.py
 fi
 
 exit 0
