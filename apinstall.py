@@ -191,7 +191,7 @@ def main():
     configure_hostapd(ssid, password, channel)
     
      # Backup original hostapd configuration file
-    backup_file("/etc/hostapd/hostapd.conf")
+    #backup_file("/etc/hostapd/hostapd.conf")
     
     #enable services and reboot pi
     enable_and_start_services()
