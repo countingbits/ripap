@@ -18,4 +18,6 @@ this can be used in addition to pihole, so you can create a RPI that acts as an 
 
 i noticed while using the sinkhole on my entire network i was having issues casting things from my phone to the TV, so I created this. 
 
+be sure to add permissions to the setup.sh or the apinstall.py prior to attempting to run them.
+
 any issues or anything I have missed please put a request in. 
